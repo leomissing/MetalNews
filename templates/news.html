@@ -1,0 +1,79 @@
+{% extends "index.html" %}
+{% block title %}News{% endblock %}
+{% block content %}
+    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark"  style="background-image: url({{ last_bg_img }}); background-repeat: no-repeat; background-size: 100%;">
+        <div class="p-5 bg-image img-fluid">
+            <div class="col-md-10 px-0">
+              <h1 class="display-5 font-italic">{{ last_post.title }}</h1>
+              <p class=" lead my-6">{{ last_text}}...</p>
+              <p class="lead mb-2"><a href="{% url 'post' last_post.id %}" class="text-white font-weight-bold">Подробнее...</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start overflow-hidden" >
+              <strong class="d-inline-block mb-2 text-primary">{{ featured.category }}</strong>
+              <h4 class=" mb-0" style="max-width: 100%;" >
+                <a class=" text-dark" >{{ featured.title }}...</a>
+              </h4>
+              <div class="mb-1 text-muted">{{ featured.data }}</div>
+              <p class=" text-truncate card-text mb-auto " style="max-width: 100%;">{{ featured.text }}...</p>
+              <a href="{% url 'post' featured.id %}">Подробнее...</a>
+            </div>
+            <img class="img-fluid" src="../static/images/1.jpg" alt="Responsive image">
+          </div>
+        </div>
+        <div class="col-md-6 text-truncate" >
+          <div class="card flex-md-row mb-4 box-shadow h-md-250  " >
+            <div class="card-body d-flex flex-column align-items-start" style="max-width: 70%;" >
+              <strong class="d-inline-block mb-2 text-success" >{{ buisness.category }}</strong>
+              <h4 class="mb-2">
+                <a class="text-dark" href="#" style="max-width: 70%; max-block-size: 50px">{{ buisness.title }}...</a>
+              </h4>
+              <div class="mb-1 text-muted">{{ buisness.data }}</div>
+              <p class=" text-wrap  card-text mb-auto text-truncate " style="max-width: 80%; max-height: 50px;" >{{ buisness.text }}</p>
+              <a href="{% url 'post' buisness.id %}">Подробнее...</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8 blog-main">
+          <h3 class="pb-3 mb-4 font-italic border-bottom">
+            Новости
+          </h3>
+        <div class="col-6 pt-1">{% if 'Metal.add_post' in user.get_group_permissions %}
+            <a class="btn btn-success" href="{% url 'post_create' crt %}">Создать новость</a>
+            {% endif %}
+          </div>
+            {% for i in queryset %}
+          <div class="blog-post">
+            <a href="{% url 'post' i.id %}"><h2 class="blog-post-title" >{{ i.title}}</h2></a>
+            <p class="blog-post-meta">{{ i.data }} от {{ i.author }}</p>
+            <p class=" text-wrap  card-text mb-auto text-truncate " >{{ i.text }}</p>
+          </div><!-- /.blog-post -->
+            {% endfor %}
+
+        </div><!-- /.blog-main -->
+
+        <aside class="col-md-4 blog-sidebar">
+          <div class="p-3 mb-3 bg-light rounded">
+            <h4 class="font-italic">О сайте</h4>
+            <p class="mb-0">Этот сайт посвещен новостям и событиям индустрии метал музыки.</p>
+          </div>
+          <div class="p-3">
+            <h4 class="font-italic">Создатель сайта</h4>
+            <ol class="list-unstyled">
+              <li><a href="https://github.com/leomissing">GitHub</a></li>
+            </ol>
+          </div>
+        </aside><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </main>
+
+{% endblock %}

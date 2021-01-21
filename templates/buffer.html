@@ -1,0 +1,7 @@
+<body>
+<div class="container-fluid">
+    {{ title }}
+    <a href="{% url 'news'  %}"><button>News</button></a>
+    {% block  content%}{% endblock %}
+</div>
+</body>

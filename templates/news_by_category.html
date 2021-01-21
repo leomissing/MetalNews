@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block title %}News{% endblock %}
+{% block content %}
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8 blog-main">
+          <h3 class="pb-3 mb-4 font-italic border-bottom">
+            Новости
+          </h3>
+
+            {% for i in list %}
+          <div class="blog-post">
+            <a href="{% url 'post' i.id %}"><h2 class="blog-post-title" >{{ i.title}}</h2></a>
+            <p class="blog-post-meta">{{ i.data }} от {{ i.author }}</p>
+            <p class=" text-wrap  card-text mb-auto text-truncate " >{{ i.text }}</p>
+          </div><!-- /.blog-post -->
+            {% endfor %}
+
+        </div><!-- /.blog-main -->
+
+      </div><!-- /.row -->
+
+    </main>
+
+{% endblock %}

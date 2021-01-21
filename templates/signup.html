@@ -1,0 +1,8 @@
+{% extends 'index.html' %} &nbsp;{% block content %}
+<h2>Регистрация</h2>
+<form method="post", class="form-inline">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Зарегистрироваться</button>
+</form>
+{% endblock content %}
